@@ -70,6 +70,7 @@ dependencies {
     def accompanist = "0.24.4-alpha"
     implementation "com.google.accompanist:accompanist-navigation-animation:$accompanist"
     implementation "com.google.accompanist:accompanist-swiperefresh:$accompanist"
+    implementation "com.google.accompanist:accompanist-placeholder-material:$accompanist"
 
     // Dependency Injection
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'

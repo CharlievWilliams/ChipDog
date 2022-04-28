@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">ChipDog</string>
-    <string name="first_view">First View</string>
+    <string name="list_of_breeds">List of Dog Breeds</string>
 </resources>

@@ -10,24 +10,25 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FirstViewModel @Inject constructor(
+class BreedListViewModel @Inject constructor(
     private val api: DogApiService
 ) : ViewModel() {
 
     val breedList = mutableStateOf(
         listOf(
-            "Option 1",
-            "Option 2",
-            "Option 3",
-            "Option 1",
-            "Option 2",
-            "Option 3",
-            "Option 1",
-            "Option 2",
-            "Option 3",
-            "Option 1",
-            "Option 2",
-            "Option 3"
+            "affenpinscher",
+            "african",
+            "airedale",
+            "akita",
+            "appenzeller",
+            "australian",
+            "basenji",
+            "beagle",
+            "bluetick",
+            "borzoi",
+            "bouvier",
+            "boxer",
+            "brabancon"
         )
     )
     val isRefreshing = mutableStateOf(false)
@@ -39,10 +40,8 @@ class FirstViewModel @Inject constructor(
             val response = api.getAllBreeds()
             if (response.isSuccessful) {
                 // TODO: Save data
-                isRefreshing.value = false
             } else {
                 // TODO: Error state
-                isRefreshing.value = false
             }
         }
     }

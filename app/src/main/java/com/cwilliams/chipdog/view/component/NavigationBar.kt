@@ -1,4 +1,4 @@
-package com.cwilliams.chipdog.view
+package com.cwilliams.chipdog.view.component
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -26,7 +26,7 @@ fun NavigationBar(
 
     if (showLargeAppBar) {
         LargeTopAppBar(
-            title = { Text(stringResource(id = screen?.title ?: R.string.first_view)) },
+            title = { Text(stringResource(id = screen?.title ?: R.string.list_of_breeds)) },
             navigationIcon = {
                 if (!hideBackButton) {
                     IconButton(onClick = { backButtonClick() }) {
@@ -38,7 +38,7 @@ fun NavigationBar(
         )
     } else {
         SmallTopAppBar(
-            title = { Text(stringResource(id = screen?.title ?: R.string.first_view)) },
+            title = { Text(stringResource(id = screen?.title ?: R.string.list_of_breeds)) },
             navigationIcon = {
                 if (!hideBackButton) {
                     IconButton(onClick = { backButtonClick() }) {

@@ -1,4 +1,4 @@
-package com.cwilliams.chipdog.view
+package com.cwilliams.chipdog.view.screen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -17,13 +17,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.cwilliams.chipdog.ui.theme.typography
-import com.cwilliams.chipdog.viewModel.FirstViewModel
+import com.cwilliams.chipdog.viewModel.BreedListViewModel
+import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.material.placeholder
+import com.google.accompanist.placeholder.material.shimmer
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @ExperimentalMaterial3Api
 @Composable
-fun FirstView(viewModel: FirstViewModel, navigateToNextScreen: () -> Unit) {
+fun BreedListScreen(viewModel: BreedListViewModel, navigateToNextScreen: () -> Unit) {
 
     val isRefreshing = viewModel.isRefreshing.value
     val breedList = viewModel.breedList.value
@@ -58,15 +61,32 @@ fun FirstView(viewModel: FirstViewModel, navigateToNextScreen: () -> Unit) {
                         Icon(
                             imageVector = Icons.Rounded.Pets,
                             contentDescription = null,
-                            modifier = Modifier.size(50.dp)
+                            modifier = Modifier
+                                .size(30.dp)
+                                .placeholder(
+                                    visible = isRefreshing,
+                                    highlight = PlaceholderHighlight.shimmer()
+                                )
                         )
                         Spacer(modifier = Modifier.width(20.dp))
-                        Text(text = breed, style = typography.titleLarge)
+                        Text(
+                            text = breed,
+                            style = typography.titleLarge,
+                            modifier = Modifier.placeholder(
+                                visible = isRefreshing,
+                                highlight = PlaceholderHighlight.shimmer()
+                            )
+                        )
                         Spacer(modifier = Modifier.weight(1f))
                         Icon(
                             imageVector = Icons.Rounded.ChevronRight,
                             contentDescription = null,
-                            modifier = Modifier.size(50.dp)
+                            modifier = Modifier
+                                .size(30.dp)
+                                .placeholder(
+                                    visible = isRefreshing,
+                                    highlight = PlaceholderHighlight.shimmer()
+                                )
                         )
                     }
                 }

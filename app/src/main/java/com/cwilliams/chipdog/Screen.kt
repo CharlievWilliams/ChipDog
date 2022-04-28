@@ -14,16 +14,16 @@ sealed class Screen(
     @StringRes val title: Int,
     val screenState: ScreenState? = ScreenState()
 ) {
-    object FirstView : Screen(
-        route = "first_view",
-        title = R.string.first_view,
+    object BreedListScreen : Screen(
+        route = "breed_list_screen",
+        title = R.string.list_of_breeds,
         screenState = ScreenState(hideBackButton = true, showLargeAppBar = true)
     )
 }
 
 fun toScreen(navBackStackEntry: NavBackStackEntry?): Screen {
     return when (navBackStackEntry?.destination?.route) {
-        Screen.FirstView.route -> Screen.FirstView
-        else -> Screen.FirstView
+        Screen.BreedListScreen.route -> Screen.BreedListScreen
+        else -> Screen.BreedListScreen
     }
 }

@@ -1,6 +1,6 @@
 package com.cwilliams.chipdog.model
 
 data class BreedResponse(
-    val breeds: List<String>,
+    val message: Message,
     val status: String
 )

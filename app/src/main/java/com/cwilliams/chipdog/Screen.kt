@@ -19,11 +19,17 @@ sealed class Screen(
         title = R.string.list_of_breeds,
         screenState = ScreenState(hideBackButton = true, showLargeAppBar = true)
     )
+
+    object BreedImageScreen : Screen(
+        route = "breed_image_screen",
+        title = R.string.dog_images
+    )
 }
 
 fun toScreen(navBackStackEntry: NavBackStackEntry?): Screen {
     return when (navBackStackEntry?.destination?.route) {
         Screen.BreedListScreen.route -> Screen.BreedListScreen
+        Screen.BreedImageScreen.route -> Screen.BreedImageScreen
         else -> Screen.BreedListScreen
     }
 }

@@ -35,14 +35,18 @@ class BreedListViewModel @Inject constructor(
 
     fun refresh() {
         isRefreshing.value = true
-        // TODO: Get working
         viewModelScope.launch(Dispatchers.IO) {
             val response = api.getAllBreeds()
             if (response.isSuccessful) {
+                val breeds = response.body()?.message
+                val status = response.body()?.status
+                print(breeds)
+                print(status)
                 // TODO: Save data
             } else {
                 // TODO: Error state
             }
+            isRefreshing.value = false
         }
     }
 }

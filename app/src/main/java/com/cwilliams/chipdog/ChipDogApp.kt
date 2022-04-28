@@ -17,8 +17,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.cwilliams.chipdog.ui.theme.ChipDogTheme
-import com.cwilliams.chipdog.view.screen.BreedListScreen
 import com.cwilliams.chipdog.view.component.NavigationBar
+import com.cwilliams.chipdog.view.screen.BreedImageScreen
+import com.cwilliams.chipdog.view.screen.BreedListScreen
+import com.cwilliams.chipdog.viewModel.BreedImageViewModel
 import com.cwilliams.chipdog.viewModel.BreedListViewModel
 
 @ExperimentalAnimationApi
@@ -55,12 +57,18 @@ fun ChipDogApp() {
                 modifier = Modifier.padding(paddingValues = padding)
             ) {
                 composable(route = Screen.BreedListScreen.route) {
-                    val firstViewModel = hiltViewModel<BreedListViewModel>()
+                    val breedListViewModel = hiltViewModel<BreedListViewModel>()
                     BreedListScreen(
-                        viewModel = firstViewModel,
+                        viewModel = breedListViewModel,
                         navigateToNextScreen = {
-                            // TODO: Navigate forward
+                            navController.navigate(Screen.BreedImageScreen.route)
                         }
+                    )
+                }
+                composable(route = Screen.BreedImageScreen.route) {
+                    val breedImageViewModel = hiltViewModel<BreedImageViewModel>()
+                    BreedImageScreen(
+                        viewModel = breedImageViewModel
                     )
                 }
             }

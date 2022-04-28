@@ -1,12 +1,16 @@
 package com.cwilliams.chipdog
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -24,14 +28,24 @@ fun ChipDogApp() {
 
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val decayAnimationSpec = rememberSplineBasedDecay<Float>()
+    val largeTopAppBarScrollBehavior = remember(decayAnimationSpec) {
+        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(decayAnimationSpec)
+    }
 
     ChipDogTheme {
         Scaffold(
             topBar = {
                 NavigationBar(
                     screen = toScreen(navBackStackEntry),
-                    popBackStack = { navController.popBackStack() }
+                    popBackStack = { navController.popBackStack() },
+                    scrollBehavior = largeTopAppBarScrollBehavior
                 )
+            },
+            modifier = if (toScreen(navBackStackEntry).screenState?.showLargeAppBar == true) {
+                Modifier.nestedScroll(largeTopAppBarScrollBehavior.nestedScrollConnection)
+            } else {
+                Modifier
             }
         ) { padding ->
             // TODO: Add animated nav host

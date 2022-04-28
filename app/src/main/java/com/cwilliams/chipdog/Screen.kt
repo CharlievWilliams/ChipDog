@@ -5,6 +5,7 @@ import androidx.navigation.NavBackStackEntry
 
 data class ScreenState(
     val hideBackButton: Boolean = false,
+    val showLargeAppBar: Boolean = false,
     var onBackButtonClick: (() -> Unit)? = null
 )
 
@@ -16,7 +17,7 @@ sealed class Screen(
     object FirstView : Screen(
         route = "first_view",
         title = R.string.first_view,
-        screenState = ScreenState(hideBackButton = true)
+        screenState = ScreenState(hideBackButton = true, showLargeAppBar = true)
     )
 }
 

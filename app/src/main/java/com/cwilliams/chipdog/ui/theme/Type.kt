@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.sp
 
 val Roboto = FontFamily.Default
 
-val Typography = Typography(
+val typography = Typography(
     displayLarge = TextStyle(
         fontFamily = Roboto,
         fontWeight = FontWeight.W400,

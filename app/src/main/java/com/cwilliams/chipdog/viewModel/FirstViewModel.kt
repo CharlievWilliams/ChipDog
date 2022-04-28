@@ -14,7 +14,22 @@ class FirstViewModel @Inject constructor(
     private val api: DogApiService
 ) : ViewModel() {
 
-    val breedList = mutableStateOf(listOf("Option 1", "Option 2", "Option 3"))
+    val breedList = mutableStateOf(
+        listOf(
+            "Option 1",
+            "Option 2",
+            "Option 3",
+            "Option 1",
+            "Option 2",
+            "Option 3",
+            "Option 1",
+            "Option 2",
+            "Option 3",
+            "Option 1",
+            "Option 2",
+            "Option 3"
+        )
+    )
     val isRefreshing = mutableStateOf(false)
 
     fun refresh() {

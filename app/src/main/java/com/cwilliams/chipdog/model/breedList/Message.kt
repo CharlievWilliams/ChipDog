@@ -1,7 +1,7 @@
-package com.cwilliams.chipdog.model
+package com.cwilliams.chipdog.model.breedList
 
 data class Message(
-    val affenpinscher: List<Any>,
+    val dog: List<Any>,
     val african: List<Any>,
     val airedale: List<Any>,
     val akita: List<Any>,

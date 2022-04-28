@@ -21,7 +21,7 @@ sealed class Screen(
     )
 
     object BreedImageScreen : Screen(
-        route = "breed_image_screen",
+        route = "breed_image_screen/{name}",
         title = R.string.dog_images
     )
 }

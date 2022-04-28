@@ -38,10 +38,7 @@ class BreedListViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val response = api.getAllBreeds()
             if (response.isSuccessful) {
-                val breeds = response.body()?.message
-                val status = response.body()?.status
-                print(breeds)
-                print(status)
+                val message = response.body()?.message
                 // TODO: Save data
             } else {
                 // TODO: Error state

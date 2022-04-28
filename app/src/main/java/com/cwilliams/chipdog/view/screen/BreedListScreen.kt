@@ -26,7 +26,7 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @ExperimentalMaterial3Api
 @Composable
-fun BreedListScreen(viewModel: BreedListViewModel, navigateToNextScreen: () -> Unit) {
+fun BreedListScreen(viewModel: BreedListViewModel, navigateToNextScreen: (String) -> Unit) {
 
     val isRefreshing = viewModel.isRefreshing.value
     val breedList = viewModel.breedList.value
@@ -49,7 +49,7 @@ fun BreedListScreen(viewModel: BreedListViewModel, navigateToNextScreen: () -> U
                         .fillMaxWidth()
                         .padding(bottom = 10.dp)
                         .clickable {
-                            navigateToNextScreen()
+                            navigateToNextScreen(breed)
                         }
                 ) {
                     Row(

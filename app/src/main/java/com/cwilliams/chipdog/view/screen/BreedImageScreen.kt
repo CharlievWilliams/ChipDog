@@ -8,7 +8,7 @@ import com.cwilliams.chipdog.viewModel.BreedImageViewModel
 
 @ExperimentalMaterial3Api
 @Composable
-fun BreedImageScreen(viewModel: BreedImageViewModel) {
+fun BreedImageScreen(viewModel: BreedImageViewModel, name: String?) {
 
     LaunchedEffect(viewModel) {
         viewModel.refresh()

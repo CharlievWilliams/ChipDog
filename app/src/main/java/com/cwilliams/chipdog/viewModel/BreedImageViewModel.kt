@@ -21,7 +21,12 @@ class BreedImageViewModel @Inject constructor(
     fun refresh(name: String?) {
         isRefreshing.value = true
         viewModelScope.launch(Dispatchers.IO) {
-            val response = api.getBreedImages(name ?: "")
+            val response = if (name?.contains(" ") == true) {
+                val list = name.split(" ")
+                api.getSpecificBreedImages(firstName = list.first(), lastName = list.last())
+            } else {
+                api.getBreedImages(name = name ?: "")
+            }
             if (response.isSuccessful) {
                 breedImages.value =
                     response.body()!!.message.asSequence().shuffled().take(Constants.MAX_IMAGES)

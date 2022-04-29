@@ -15,4 +15,10 @@ interface DogApiService {
     suspend fun getBreedImages(
         @Path("name") name: String
     ): Response<BreedImageResponse>
+
+    @GET("breed/{last_name}/{first_name}/images")
+    suspend fun getSpecificBreedImages(
+        @Path("last_name") lastName: String,
+        @Path("first_name") firstName: String
+    ): Response<BreedImageResponse>
 }

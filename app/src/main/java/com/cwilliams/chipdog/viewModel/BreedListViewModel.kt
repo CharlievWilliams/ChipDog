@@ -23,7 +23,17 @@ class BreedListViewModel @Inject constructor(
             val response = api.getAllBreeds()
             if (response.isSuccessful) {
                 // TODO: Get more detailed Data
-                breedList.value = response.body()!!.message.getData()
+                val list = mutableListOf<String>()
+                for (key in response.body()!!.message) {
+                    if (key.value.isEmpty()) {
+                        list.add(key.key)
+                    } else {
+                        for (value in key.value) {
+                            list.add(value + " " + key.key)
+                        }
+                    }
+                }
+                breedList.value = list.toList().sorted()
             } else {
                 // TODO: Error state
             }

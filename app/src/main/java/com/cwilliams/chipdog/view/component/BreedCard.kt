@@ -50,7 +50,7 @@ fun BreedCard(isRefreshing: Boolean, breed: String, navigateToNextScreen: (Strin
             Spacer(modifier = Modifier.weight(1f))
             Icon(
                 imageVector = Icons.Rounded.ChevronRight,
-                contentDescription = null,
+                contentDescription = "button",
                 modifier = Modifier
                     .size(dimensionResource(id = R.dimen.icon_size))
                     .placeholder(

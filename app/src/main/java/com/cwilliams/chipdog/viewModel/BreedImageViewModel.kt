@@ -23,7 +23,9 @@ class BreedImageViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val response = api.getBreedImages(name ?: "")
             if (response.isSuccessful) {
-                breedImages.value = response.body()!!.message.asSequence().shuffled().take(Constants.MAX_IMAGES).toList()
+                breedImages.value =
+                    response.body()!!.message.asSequence().shuffled().take(Constants.MAX_IMAGES)
+                        .toList()
                 print(breedImages.value)
             } else {
                 // TODO: Error state

@@ -14,23 +14,7 @@ class BreedListViewModel @Inject constructor(
     private val api: DogApiService
 ) : ViewModel() {
 
-    val breedList = mutableStateOf(
-        listOf(
-            "affenpinscher",
-            "african",
-            "airedale",
-            "akita",
-            "appenzeller",
-            "australian",
-            "basenji",
-            "beagle",
-            "bluetick",
-            "borzoi",
-            "bouvier",
-            "boxer",
-            "brabancon"
-        )
-    )
+    val breedList = mutableStateOf<List<String>>(listOf())
     val isRefreshing = mutableStateOf(false)
 
     fun refresh() {
@@ -38,8 +22,8 @@ class BreedListViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val response = api.getAllBreeds()
             if (response.isSuccessful) {
-                val message = response.body()?.message
-                // TODO: Save data
+                // TODO: Get more detailed Data
+                breedList.value = response.body()!!.message.getData()
             } else {
                 // TODO: Error state
             }

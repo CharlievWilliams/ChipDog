@@ -1,6 +1,9 @@
 package com.cwilliams.chipdog.model.breedList
 
+import kotlin.reflect.full.memberProperties
+
 data class Message(
+    val affenpinscher: List<Any>,
     val african: List<Any>,
     val airedale: List<Any>,
     val akita: List<Any>,
@@ -95,4 +98,12 @@ data class Message(
     val weimaraner: List<Any>,
     val whippet: List<Any>,
     val wolfhound: List<String>
-)
+) {
+    fun getData(): List<String> {
+        val list = mutableListOf<String>()
+        for (prop in Message::class.memberProperties) {
+            list.add(prop.name)
+        }
+        return list.toList()
+    }
+}

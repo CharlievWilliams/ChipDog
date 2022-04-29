@@ -20,9 +20,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.cwilliams.chipdog.R
-import com.cwilliams.chipdog.constants.Constants
 import com.cwilliams.chipdog.constants.Constants.Companion.ANIMATION_OFFSET
 import com.cwilliams.chipdog.view.component.BreedCard
 import com.cwilliams.chipdog.view.component.InitialCard
@@ -97,8 +97,11 @@ fun BreedListScreen(viewModel: BreedListViewModel, navigateToNextScreen: (String
                 },
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.default_padding))
             ) {
-                Icon(Icons.Filled.ArrowUpward, contentDescription = "Scroll to top")
-                Text("Scroll To Top")
+                Icon(
+                    imageVector = Icons.Filled.ArrowUpward,
+                    contentDescription = stringResource(id = R.string.scroll_to_top)
+                )
+                Text(text = stringResource(id = R.string.scroll_to_top))
             }
         }
     }

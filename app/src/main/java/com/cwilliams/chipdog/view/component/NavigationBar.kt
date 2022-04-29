@@ -29,14 +29,17 @@ fun NavigationBar(
         LargeTopAppBar(
             title = {
                 Text(
-                    stringResource(id = screen?.title ?: R.string.list_of_breeds),
+                    text = stringResource(id = screen?.title ?: R.string.list_of_breeds),
                     fontWeight = FontWeight.Bold
                 )
             },
             navigationIcon = {
                 if (!hideBackButton) {
                     IconButton(onClick = { backButtonClick() }) {
-                        Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(
+                            imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = stringResource(id = R.string.back)
+                        )
                     }
                 }
             },
@@ -46,14 +49,17 @@ fun NavigationBar(
         SmallTopAppBar(
             title = {
                 Text(
-                    stringResource(id = screen?.title ?: R.string.list_of_breeds),
+                    text = stringResource(id = screen?.title ?: R.string.list_of_breeds),
                     fontWeight = FontWeight.Bold
                 )
             },
             navigationIcon = {
                 if (!hideBackButton) {
                     IconButton(onClick = { backButtonClick() }) {
-                        Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(
+                            imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = stringResource(id = R.string.back)
+                        )
                     }
                 }
             }

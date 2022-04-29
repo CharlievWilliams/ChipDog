@@ -76,7 +76,6 @@ fun ChipDogTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composabl
     MaterialTheme(
         colorScheme = colors,
         typography = typography,
-        shapes = Shapes,
         content = content
     )
 }

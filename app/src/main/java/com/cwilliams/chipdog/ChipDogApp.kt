@@ -2,6 +2,7 @@ package com.cwilliams.chipdog
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.rememberSplineBasedDecay
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -25,6 +26,7 @@ import com.cwilliams.chipdog.view.screen.BreedListScreen
 import com.cwilliams.chipdog.viewModel.BreedImageViewModel
 import com.cwilliams.chipdog.viewModel.BreedListViewModel
 
+@ExperimentalFoundationApi
 @ExperimentalAnimationApi
 @ExperimentalMaterial3Api
 @Composable

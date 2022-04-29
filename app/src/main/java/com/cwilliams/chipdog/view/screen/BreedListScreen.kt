@@ -1,87 +1,100 @@
 package com.cwilliams.chipdog.view.screen
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.animation.*
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ChevronRight
-import androidx.compose.material3.Card
+import androidx.compose.material.icons.filled.ArrowUpward
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
-import com.cwilliams.chipdog.ui.theme.typography
+import com.cwilliams.chipdog.view.component.BreedCard
+import com.cwilliams.chipdog.view.component.InitialCard
 import com.cwilliams.chipdog.viewModel.BreedListViewModel
-import com.google.accompanist.placeholder.PlaceholderHighlight
-import com.google.accompanist.placeholder.material.placeholder
-import com.google.accompanist.placeholder.material.shimmer
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import kotlinx.coroutines.launch
 
+@ExperimentalFoundationApi
 @ExperimentalMaterial3Api
 @Composable
 fun BreedListScreen(viewModel: BreedListViewModel, navigateToNextScreen: (String) -> Unit) {
 
     val isRefreshing = viewModel.isRefreshing.value
+    val listState = rememberLazyListState()
     val breedList = viewModel.breedList.value
+    val grouped = breedList.groupBy { it[0] }
+
+    val coroutineScope = rememberCoroutineScope()
+
+    val showButton by remember {
+        derivedStateOf {
+            listState.firstVisibleItemIndex > 0
+        }
+    }
+
+    val density = LocalDensity.current
 
     LaunchedEffect(viewModel) {
         viewModel.refresh()
     }
 
-    SwipeRefresh(
-        state = rememberSwipeRefreshState(isRefreshing),
-        onRefresh = { viewModel.refresh() },
-        modifier = Modifier.fillMaxSize()
-    ) {
-        LazyColumn(
-            contentPadding = PaddingValues(15.dp)
+    Box {
+        SwipeRefresh(
+            state = rememberSwipeRefreshState(isRefreshing),
+            onRefresh = { viewModel.refresh() },
+            modifier = Modifier.fillMaxSize()
         ) {
-            items(breedList) { breed ->
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 10.dp)
-                        .clickable {
-                            navigateToNextScreen(breed)
-                        },
-                    shape = RoundedCornerShape(20.dp)
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .height(80.dp)
-                            .padding(horizontal = 20.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = breed.replaceFirstChar { it.titlecase() },
-                            style = typography.titleLarge,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.placeholder(
-                                visible = isRefreshing,
-                                highlight = PlaceholderHighlight.shimmer()
-                            )
-                        )
-                        Spacer(modifier = Modifier.weight(1f))
-                        Icon(
-                            imageVector = Icons.Rounded.ChevronRight,
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(30.dp)
-                                .placeholder(
-                                    visible = isRefreshing,
-                                    highlight = PlaceholderHighlight.shimmer()
-                                )
+            LazyColumn(
+                state = listState,
+                contentPadding = PaddingValues(15.dp)
+            ) {
+                grouped.forEach { (initial, breeds) ->
+                    stickyHeader {
+                        InitialCard(initial = initial.toString(), isRefreshing = isRefreshing)
+                    }
+                    items(breeds) { breed ->
+                        BreedCard(
+                            isRefreshing = isRefreshing,
+                            breed = breed,
+                            navigateToNextScreen = navigateToNextScreen
                         )
                     }
                 }
+            }
+        }
+        AnimatedVisibility(
+            visible = showButton,
+            enter = slideInVertically {
+                with(density) { 40.dp.roundToPx() }
+            } + fadeIn(),
+            exit = slideOutVertically() {
+                with(density) { 40.dp.roundToPx() }
+            } + fadeOut(),
+            modifier = Modifier.align(Alignment.BottomEnd)
+        ) {
+            ExtendedFloatingActionButton(
+                onClick = {
+                    coroutineScope.launch {
+                        listState.animateScrollToItem(index = 0)
+                    }
+                },
+                modifier = Modifier.padding(20.dp)
+            ) {
+                Icon(Icons.Filled.ArrowUpward, contentDescription = "Scroll to top")
+                Text("Scroll To Top")
             }
         }
     }

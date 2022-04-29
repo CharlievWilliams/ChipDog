@@ -1,5 +1,6 @@
 package com.cwilliams.chipdog.api
 
+import com.cwilliams.chipdog.model.breedImages.BreedImageResponse
 import com.cwilliams.chipdog.model.breedList.BreedListResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -13,5 +14,5 @@ interface DogApiService {
     @GET("breed/{name}/images")
     suspend fun getBreedImages(
         @Path("name") name: String
-    ): Response<BreedListResponse>
+    ): Response<BreedImageResponse>
 }

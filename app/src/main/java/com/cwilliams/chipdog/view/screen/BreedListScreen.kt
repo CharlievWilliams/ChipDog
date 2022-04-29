@@ -19,7 +19,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
+import com.cwilliams.chipdog.R
+import com.cwilliams.chipdog.constants.Constants
+import com.cwilliams.chipdog.constants.Constants.Companion.ANIMATION_OFFSET
 import com.cwilliams.chipdog.view.component.BreedCard
 import com.cwilliams.chipdog.view.component.InitialCard
 import com.cwilliams.chipdog.viewModel.BreedListViewModel
@@ -59,7 +63,7 @@ fun BreedListScreen(viewModel: BreedListViewModel, navigateToNextScreen: (String
         ) {
             LazyColumn(
                 state = listState,
-                contentPadding = PaddingValues(15.dp)
+                contentPadding = PaddingValues(dimensionResource(id = R.dimen.default_padding))
             ) {
                 grouped.forEach { (initial, breeds) ->
                     stickyHeader {
@@ -78,10 +82,10 @@ fun BreedListScreen(viewModel: BreedListViewModel, navigateToNextScreen: (String
         AnimatedVisibility(
             visible = showButton,
             enter = slideInVertically {
-                with(density) { 40.dp.roundToPx() }
+                with(density) { ANIMATION_OFFSET.dp.roundToPx() }
             } + fadeIn(),
-            exit = slideOutVertically() {
-                with(density) { 40.dp.roundToPx() }
+            exit = slideOutVertically {
+                with(density) { ANIMATION_OFFSET.dp.roundToPx() }
             } + fadeOut(),
             modifier = Modifier.align(Alignment.BottomEnd)
         ) {
@@ -91,7 +95,7 @@ fun BreedListScreen(viewModel: BreedListViewModel, navigateToNextScreen: (String
                         listState.animateScrollToItem(index = 0)
                     }
                 },
-                modifier = Modifier.padding(20.dp)
+                modifier = Modifier.padding(dimensionResource(id = R.dimen.default_padding))
             ) {
                 Icon(Icons.Filled.ArrowUpward, contentDescription = "Scroll to top")
                 Text("Scroll To Top")

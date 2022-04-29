@@ -13,8 +13,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
+import com.cwilliams.chipdog.R
 import com.cwilliams.chipdog.ui.theme.typography
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material.placeholder
@@ -26,14 +27,14 @@ fun InitialCard(initial: String, isRefreshing: Boolean) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 10.dp),
-        shape = RoundedCornerShape(15.dp),
+            .padding(bottom = dimensionResource(id = R.dimen.grid_spacing)),
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.small_rounded_corner_size)),
         colors = CardDefaults.elevatedCardColors(containerColor = MaterialTheme.colors.secondary)
     ) {
         Row(
             modifier = Modifier
-                .height(50.dp)
-                .padding(horizontal = 15.dp),
+                .height(dimensionResource(id = R.dimen.small_card_height))
+                .padding(horizontal = dimensionResource(id = R.dimen.default_padding)),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(

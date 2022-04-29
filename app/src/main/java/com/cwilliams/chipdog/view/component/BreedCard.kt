@@ -12,8 +12,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
+import com.cwilliams.chipdog.R
 import com.cwilliams.chipdog.ui.theme.typography
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material.placeholder
@@ -25,16 +26,16 @@ fun BreedCard(isRefreshing: Boolean, breed: String, navigateToNextScreen: (Strin
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 10.dp)
+            .padding(bottom = dimensionResource(id = R.dimen.grid_spacing))
             .clickable {
                 navigateToNextScreen(breed)
             },
-        shape = RoundedCornerShape(20.dp)
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.default_padding))
     ) {
         Row(
             modifier = Modifier
-                .height(80.dp)
-                .padding(horizontal = 20.dp),
+                .height(dimensionResource(id = R.dimen.card_height))
+                .padding(horizontal = dimensionResource(id = R.dimen.default_padding)),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -51,7 +52,7 @@ fun BreedCard(isRefreshing: Boolean, breed: String, navigateToNextScreen: (Strin
                 imageVector = Icons.Rounded.ChevronRight,
                 contentDescription = null,
                 modifier = Modifier
-                    .size(30.dp)
+                    .size(dimensionResource(id = R.dimen.icon_size))
                     .placeholder(
                         visible = isRefreshing,
                         highlight = PlaceholderHighlight.shimmer()

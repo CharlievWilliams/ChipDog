@@ -17,8 +17,10 @@ class BreedImageViewModel @Inject constructor(
 
     val breedImages = mutableStateOf<List<String>>(listOf())
     val isRefreshing = mutableStateOf(false)
+    val isError = mutableStateOf(false)
 
     fun refresh(name: String?) {
+        isError.value = false
         isRefreshing.value = true
         viewModelScope.launch(Dispatchers.IO) {
             val response = if (name?.contains(" ") == true) {
@@ -33,7 +35,7 @@ class BreedImageViewModel @Inject constructor(
                         .toList()
                 print(breedImages.value)
             } else {
-                // TODO: Error state
+                isError.value = true
             }
             isRefreshing.value = false
         }

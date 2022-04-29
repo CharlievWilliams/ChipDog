@@ -1,5 +1,6 @@
 package com.cwilliams.chipdog.viewModel
 
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,13 +17,14 @@ class BreedListViewModel @Inject constructor(
 
     val breedList = mutableStateOf<List<String>>(listOf())
     val isRefreshing = mutableStateOf(false)
+    val isError = mutableStateOf(false)
 
     fun refresh() {
+        isError.value = false
         isRefreshing.value = true
         viewModelScope.launch(Dispatchers.IO) {
             val response = api.getAllBreeds()
             if (response.isSuccessful) {
-                // TODO: Get more detailed Data
                 val list = mutableListOf<String>()
                 for (key in response.body()!!.message) {
                     if (key.value.isEmpty()) {
@@ -35,7 +37,7 @@ class BreedListViewModel @Inject constructor(
                 }
                 breedList.value = list.toList().sorted()
             } else {
-                // TODO: Error state
+                isError.value = true
             }
             isRefreshing.value = false
         }

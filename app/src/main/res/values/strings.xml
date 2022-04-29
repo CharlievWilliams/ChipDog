@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">ChipDog</string>
-    <string name="list_of_breeds">List of Dog Breeds</string>
-    <string name="dog_images">Dog Images</string>
+    <string name="list_of_breeds">Dog Breeds</string>
+    <string name="dog_images">Images</string>
     <string name="back">Back</string>
     <string name="scroll_to_top">Scroll to top</string>
+    <string name="error">Error</string>
+    <string name="error_description">An error has occurred. Try refreshing.</string>
 </resources>

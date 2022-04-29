@@ -5,6 +5,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import com.cwilliams.chipdog.R
 import com.cwilliams.chipdog.Screen
 
@@ -26,7 +27,12 @@ fun NavigationBar(
 
     if (showLargeAppBar) {
         LargeTopAppBar(
-            title = { Text(stringResource(id = screen?.title ?: R.string.list_of_breeds)) },
+            title = {
+                Text(
+                    stringResource(id = screen?.title ?: R.string.list_of_breeds),
+                    fontWeight = FontWeight.Bold
+                )
+            },
             navigationIcon = {
                 if (!hideBackButton) {
                     IconButton(onClick = { backButtonClick() }) {
@@ -38,7 +44,12 @@ fun NavigationBar(
         )
     } else {
         SmallTopAppBar(
-            title = { Text(stringResource(id = screen?.title ?: R.string.list_of_breeds)) },
+            title = {
+                Text(
+                    stringResource(id = screen?.title ?: R.string.list_of_breeds),
+                    fontWeight = FontWeight.Bold
+                )
+            },
             navigationIcon = {
                 if (!hideBackButton) {
                     IconButton(onClick = { backButtonClick() }) {

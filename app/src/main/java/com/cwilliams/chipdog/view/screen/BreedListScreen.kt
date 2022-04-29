@@ -4,9 +4,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ChevronRight
-import androidx.compose.material.icons.rounded.Pets
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.cwilliams.chipdog.ui.theme.typography
 import com.cwilliams.chipdog.viewModel.BreedListViewModel
@@ -50,7 +51,8 @@ fun BreedListScreen(viewModel: BreedListViewModel, navigateToNextScreen: (String
                         .padding(bottom = 10.dp)
                         .clickable {
                             navigateToNextScreen(breed)
-                        }
+                        },
+                    shape = RoundedCornerShape(20.dp)
                 ) {
                     Row(
                         modifier = Modifier
@@ -58,20 +60,10 @@ fun BreedListScreen(viewModel: BreedListViewModel, navigateToNextScreen: (String
                             .padding(horizontal = 20.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Icon(
-                            imageVector = Icons.Rounded.Pets,
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(30.dp)
-                                .placeholder(
-                                    visible = isRefreshing,
-                                    highlight = PlaceholderHighlight.shimmer()
-                                )
-                        )
-                        Spacer(modifier = Modifier.width(20.dp))
                         Text(
-                            text = breed,
+                            text = breed.replaceFirstChar { it.titlecase() },
                             style = typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
                             modifier = Modifier.placeholder(
                                 visible = isRefreshing,
                                 highlight = PlaceholderHighlight.shimmer()

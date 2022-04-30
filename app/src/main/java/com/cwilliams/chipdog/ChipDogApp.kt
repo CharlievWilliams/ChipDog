@@ -54,7 +54,6 @@ fun ChipDogApp() {
                 Modifier
             }
         ) { padding ->
-            // TODO: Add animated nav host
             NavHost(
                 navController = navController,
                 startDestination = Screen.BreedListScreen.route,

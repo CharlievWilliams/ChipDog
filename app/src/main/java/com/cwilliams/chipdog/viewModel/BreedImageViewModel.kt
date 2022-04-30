@@ -3,7 +3,7 @@ package com.cwilliams.chipdog.viewModel
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cwilliams.chipdog.api.DogApiService
+import com.cwilliams.chipdog.api.BreedApiService
 import com.cwilliams.chipdog.constants.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BreedImageViewModel @Inject constructor(
-    private val api: DogApiService
+    private val api: BreedApiService
 ) : ViewModel() {
 
     val breedImages = mutableStateOf<List<String>>(listOf())
@@ -23,6 +23,7 @@ class BreedImageViewModel @Inject constructor(
         isError.value = false
         isRefreshing.value = true
         viewModelScope.launch(Dispatchers.IO) {
+            // Perform different request if breed is specific or generic
             val response = if (name?.contains(" ") == true) {
                 val list = name.split(" ")
                 api.getSpecificBreedImages(firstName = list.first(), lastName = list.last())
@@ -30,10 +31,10 @@ class BreedImageViewModel @Inject constructor(
                 api.getBreedImages(name = name ?: "")
             }
             if (response.isSuccessful) {
+                // Retrieve 10 random images (up to if fewer are available)
                 breedImages.value =
                     response.body()!!.message.asSequence().shuffled().take(Constants.MAX_IMAGES)
                         .toList()
-                print(breedImages.value)
             } else {
                 isError.value = true
             }

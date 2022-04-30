@@ -3,7 +3,7 @@ package com.cwilliams.chipdog.viewModel
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cwilliams.chipdog.api.DogApiService
+import com.cwilliams.chipdog.api.BreedApiService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BreedListViewModel @Inject constructor(
-    private val api: DogApiService
+    private val api: BreedApiService
 ) : ViewModel() {
 
     val breedList = mutableStateOf<List<String>>(listOf())
@@ -27,8 +27,10 @@ class BreedListViewModel @Inject constructor(
                 val list = mutableListOf<String>()
                 for (key in response.body()!!.message) {
                     if (key.value.isEmpty()) {
+                        // Add generic breed
                         list.add(key.key)
                     } else {
+                        // Add each specific breed
                         for (value in key.value) {
                             list.add(value + " " + key.key)
                         }

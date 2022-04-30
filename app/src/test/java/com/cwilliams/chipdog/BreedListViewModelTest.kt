@@ -1,6 +1,6 @@
 package com.cwilliams.chipdog
 
-import com.cwilliams.chipdog.api.DogApiService
+import com.cwilliams.chipdog.api.BreedApiService
 import com.cwilliams.chipdog.viewModel.BreedListViewModel
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
@@ -13,7 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner
 class BreedListViewModelTest {
 
     @Mock
-    private lateinit var api: DogApiService
+    private lateinit var api: BreedApiService
 
     private lateinit var viewModel: BreedListViewModel
 

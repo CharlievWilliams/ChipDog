@@ -1,6 +1,6 @@
 package com.cwilliams.chipdog.di
 
-import com.cwilliams.chipdog.api.DogApiService
+import com.cwilliams.chipdog.api.BreedApiService
 import com.cwilliams.chipdog.constants.Constants
 import dagger.Module
 import dagger.Provides
@@ -16,11 +16,11 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun providesDogRetrofit(): DogApiService {
+    fun providesDogRetrofit(): BreedApiService {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(DogApiService::class.java)
+            .create(BreedApiService::class.java)
     }
 }

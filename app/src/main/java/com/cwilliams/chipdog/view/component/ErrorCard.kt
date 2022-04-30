@@ -46,7 +46,7 @@ fun ErrorCard() {
             Spacer(modifier = Modifier.weight(1f))
             Icon(
                 imageVector = Icons.Rounded.Error,
-                contentDescription = "button",
+                contentDescription = null,
                 modifier = Modifier.size(dimensionResource(id = R.dimen.icon_size))
             )
         }

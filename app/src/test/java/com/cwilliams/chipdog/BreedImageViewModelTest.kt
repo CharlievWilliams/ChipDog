@@ -1,7 +1,7 @@
 package com.cwilliams.chipdog
 
 import com.cwilliams.chipdog.api.DogApiService
-import com.cwilliams.chipdog.viewModel.BreedListViewModel
+import com.cwilliams.chipdog.viewModel.BreedImageViewModel
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -10,16 +10,16 @@ import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class BreedListViewModelTest {
+class BreedImageViewModelTest {
 
     @Mock
     private lateinit var api: DogApiService
 
-    private lateinit var viewModel: BreedListViewModel
+    private lateinit var viewModel: BreedImageViewModel
 
     @Before
     fun init() {
-        viewModel = BreedListViewModel(api)
+        viewModel = BreedImageViewModel(api)
     }
 
     @Test
@@ -28,7 +28,7 @@ class BreedListViewModelTest {
         viewModel.isRefreshing.value = false
 
         // When
-        viewModel.refresh()
+        viewModel.refresh(NAME)
 
         // Then
         assertThat(viewModel.isRefreshing.value).isEqualTo(true)
@@ -40,9 +40,13 @@ class BreedListViewModelTest {
         viewModel.isError.value = true
 
         // When
-        viewModel.refresh()
+        viewModel.refresh(NAME)
 
         // Then
         assertThat(viewModel.isError.value).isEqualTo(false)
+    }
+
+    companion object {
+        const val NAME = "Basenji"
     }
 }

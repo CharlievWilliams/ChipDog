@@ -1,6 +1,5 @@
 package com.cwilliams.chipdog.viewModel
 
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

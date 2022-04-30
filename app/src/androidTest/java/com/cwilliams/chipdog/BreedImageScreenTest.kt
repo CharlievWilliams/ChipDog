@@ -6,8 +6,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import com.cwilliams.chipdog.ui.theme.ChipDogTheme
-import com.cwilliams.chipdog.view.screen.BreedListScreen
-import com.cwilliams.chipdog.viewModel.BreedListViewModel
+import com.cwilliams.chipdog.view.screen.BreedImageScreen
+import com.cwilliams.chipdog.viewModel.BreedImageViewModel
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Before
@@ -19,7 +19,7 @@ import javax.inject.Inject
 @ExperimentalMaterial3Api
 @ExperimentalAnimationApi
 @HiltAndroidTest
-class BreedListScreenTest {
+class BreedImageScreenTest {
 
     @get:Rule(order = 0)
     val composeTestRule = createComposeRule()
@@ -28,7 +28,7 @@ class BreedListScreenTest {
     val hiltRule = HiltAndroidRule(this)
 
     @Inject
-    lateinit var viewModel: BreedListViewModel
+    lateinit var viewModel: BreedImageViewModel
 
     @Before
     fun init() {
@@ -40,7 +40,7 @@ class BreedListScreenTest {
         // Given
         composeTestRule.setContent {
             ChipDogTheme {
-                BreedListScreen(viewModel = viewModel, navigateToNextScreen = {})
+                BreedImageScreen(viewModel = viewModel, name = NAME)
             }
         }
         composeTestRule.waitForIdle()
@@ -50,5 +50,9 @@ class BreedListScreenTest {
 
         // Then
         composeTestRule.onNodeWithText("Scroll to top").assertIsDisplayed()
+    }
+
+    companion object {
+        const val NAME = "Basenji"
     }
 }

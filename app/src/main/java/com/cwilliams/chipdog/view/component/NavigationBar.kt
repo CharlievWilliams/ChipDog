@@ -8,6 +8,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.cwilliams.chipdog.R
 import com.cwilliams.chipdog.Screen
+import com.cwilliams.chipdog.ui.theme.typography
 
 @Composable
 fun NavigationBar(
@@ -30,7 +31,8 @@ fun NavigationBar(
             title = {
                 Text(
                     text = stringResource(id = screen?.title ?: R.string.list_of_breeds),
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    style = typography.displaySmall
                 )
             },
             navigationIcon = {

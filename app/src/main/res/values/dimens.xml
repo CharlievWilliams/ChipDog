@@ -6,7 +6,7 @@
     <dimen name="grid_image_height">250.dp</dimen>
     <dimen name="rounded_corner_size">20.dp</dimen>
     <dimen name="small_rounded_corner_size">15.dp</dimen>
-    <dimen name="card_height">80.dp</dimen>
-    <dimen name="small_card_height">50.dp</dimen>
+    <dimen name="card_height">70.dp</dimen>
+    <dimen name="small_card_height">40.dp</dimen>
     <dimen name="icon_size">30.dp</dimen>
 </resources>

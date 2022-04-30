@@ -8,13 +8,18 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import com.cwilliams.chipdog.R
+import com.cwilliams.chipdog.ui.theme.typography
 import com.cwilliams.chipdog.view.component.ErrorCard
 import com.cwilliams.chipdog.viewModel.BreedImageViewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
@@ -47,7 +52,18 @@ fun BreedImageScreen(viewModel: BreedImageViewModel, name: String?) {
                 ErrorCard()
             }
         } else {
-            Column {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(
+                    text = name?.split(" ")?.joinToString(" ") { word ->
+                        word.replaceFirstChar { character -> character.titlecase() }
+                    } ?: "",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = dimensionResource(id = R.dimen.default_padding)),
+                    style = typography.displaySmall,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
                 LazyVerticalGrid(
                     columns = GridCells.Adaptive(minSize = dimensionResource(id = R.dimen.grid_cell_width)),
                     contentPadding = PaddingValues(dimensionResource(id = R.dimen.default_padding)),

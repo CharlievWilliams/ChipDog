@@ -39,7 +39,8 @@ fun BreedCard(isRefreshing: Boolean, breed: String, navigateToNextScreen: (Strin
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = breed.replaceFirstChar { it.titlecase() },
+                text = breed.split(" ")
+                    .joinToString(" ") { word -> word.replaceFirstChar { character -> character.titlecase() } },
                 style = typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.placeholder(

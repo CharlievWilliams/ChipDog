@@ -40,7 +40,7 @@ Hilt is used to Inject ViewModels to their respective View, and to Inject Retrof
 * Mockito
 * Google Truth
 
-## Testing Testing
+## Testing Overview
 ### User Testing
 User testing performed on an emulated Pixel 5 running API 21, and a physical Pixel 6 Pro running API 31.
 ### Unit Testing

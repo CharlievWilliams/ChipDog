@@ -3,20 +3,20 @@ A simple Android application to search for random sets of images of various dog 
 
 ## Architecture
 ### MVVM
-Paragraph
+An MVVM architecture that takes advantage of mutableStateOf in ViewModels.
 
 ### Compose
-Paragraph
+All UI elements developed in Jetpack Compose.
 
 ## Points of Interest
 ### Material 3
-Paragraph
-
-### Dark Theme
-Paragraph
+#### Components
+The app takes advantage of several Material 3 components including LargeTopAppBar, ElevatedCard and ExtendedFloatingActionButton.
+#### Dark Theme
+The app also takes advantage of a custom Material 3 theming setup, with bespoke light and dark theme.
 
 ### Dependency Injection
-Paragraph
+Hilt is used to Inject ViewModels to their respective View, and to Inject Retrofit into ViewModels.
 
 ## Dependencies
 ### Hilt
@@ -32,8 +32,8 @@ Paragraph
 
 ## Testing Testing
 ### User Testing
-Paragraph
+User testing performed on an emulated Pixel 5 running API 21, and a physical Pixel 6 Pro running API 31.
 ### Unit Testing
-Paragraph
+Unit tests passing for 100% ViewModel coverage.
 ### UI Testing
-Paragraph
+UI tests passing for 100% View coverage.

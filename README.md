@@ -1,12 +1,19 @@
 # ChipDog
 A simple Android application to search for random sets of images of various dog breeds.
 
+## Screen Description
+### Breed List
+A swipe to refresh lazy list that shows a list of dog breeds from https://dog.ceo/dog-api/documentation/. List is alphabetically ordered and utilised sticky headers. Once scrolled, a FAB will show that allows the user to scroll to the top of the list.
+
+### Breed Images
+A swipe to refresh lazy grid that shows 10 random images (if available) of a chosen breed from https://dog.ceo/dog-api/documentation/breed
+
 ## Architecture
 ### MVVM
-An MVVM architecture that takes advantage of mutableStateOf in ViewModels.
+An MVVM architecture that takes advantage of mutableStateOf in ViewModels. Any state change must be performed in the ViewModel.
 
 ### Compose
-All UI elements developed in Jetpack Compose.
+All UI elements developed with Jetpack Compose.
 
 ## Points of Interest
 ### Material 3
@@ -18,17 +25,20 @@ The app also takes advantage of a custom Material 3 theming setup, with bespoke 
 ### Dependency Injection
 Hilt is used to Inject ViewModels to their respective View, and to Inject Retrofit into ViewModels.
 
-## Dependencies
-### Hilt
-### Coroutines
-### Gson
-### Retrofit
-### Glide
-### Accompanist Libraries
-#### Swipe Refresh
-#### Placeholder
-### Mockito
-### Google Truth
+## Dependency Overview
+* Compose
+* Material 3
+* Hilt
+* Coroutines
+* Gson
+* Retrofit
+* Glide
+* Accompanist Libraries
+    * Swipe Refresh
+    * Placeholder
+* JUnit
+* Mockito
+* Google Truth
 
 ## Testing Testing
 ### User Testing

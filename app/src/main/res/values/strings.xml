@@ -6,4 +6,6 @@
     <string name="scroll_to_top">Scroll to top</string>
     <string name="error">Error</string>
     <string name="error_description">An error has occurred. Try refreshing.</string>
+    <string name="subscription">Subscription</string>
+    <string name="cancel">Cancel</string>
 </resources>

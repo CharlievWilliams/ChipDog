@@ -30,7 +30,6 @@ class BreedImageScreenTest {
     @Before
     fun init() {
         hiltRule.inject()
-
     }
 
     @Test

@@ -19,7 +19,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.cwilliams.chipdog.ui.theme.ChipDogTheme
 import com.cwilliams.chipdog.view.component.NavigationBar
 import com.cwilliams.chipdog.view.screen.BreedImageScreen
 import com.cwilliams.chipdog.view.screen.BreedListScreen
@@ -39,45 +38,43 @@ fun ChipDogApp() {
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(decayAnimationSpec)
     }
 
-    ChipDogTheme {
-        Scaffold(
-            topBar = {
-                NavigationBar(
-                    screen = toScreen(navBackStackEntry),
-                    popBackStack = { navController.popBackStack() },
-                    scrollBehavior = largeTopAppBarScrollBehavior
+    Scaffold(
+        topBar = {
+            NavigationBar(
+                screen = toScreen(navBackStackEntry),
+                popBackStack = { navController.popBackStack() },
+                scrollBehavior = largeTopAppBarScrollBehavior
+            )
+        },
+        modifier = if (toScreen(navBackStackEntry).screenState?.showLargeAppBar == true) {
+            Modifier.nestedScroll(largeTopAppBarScrollBehavior.nestedScrollConnection)
+        } else {
+            Modifier
+        }
+    ) { padding ->
+        NavHost(
+            navController = navController,
+            startDestination = Screen.BreedListScreen.route,
+            modifier = Modifier.padding(paddingValues = padding)
+        ) {
+            composable(route = Screen.BreedListScreen.route) {
+                val breedListViewModel = hiltViewModel<BreedListViewModel>()
+                BreedListScreen(
+                    viewModel = breedListViewModel,
+                    navigateToNextScreen = { breed ->
+                        navController.navigate("breed_image_screen/${breed}")
+                    }
                 )
-            },
-            modifier = if (toScreen(navBackStackEntry).screenState?.showLargeAppBar == true) {
-                Modifier.nestedScroll(largeTopAppBarScrollBehavior.nestedScrollConnection)
-            } else {
-                Modifier
             }
-        ) { padding ->
-            NavHost(
-                navController = navController,
-                startDestination = Screen.BreedListScreen.route,
-                modifier = Modifier.padding(paddingValues = padding)
-            ) {
-                composable(route = Screen.BreedListScreen.route) {
-                    val breedListViewModel = hiltViewModel<BreedListViewModel>()
-                    BreedListScreen(
-                        viewModel = breedListViewModel,
-                        navigateToNextScreen = { breed ->
-                            navController.navigate("breed_image_screen/${breed}")
-                        }
-                    )
-                }
-                composable(
-                    route = Screen.BreedImageScreen.route,
-                    arguments = listOf(navArgument("name") { type = NavType.StringType })
-                ) { backStackEntry ->
-                    val breedImageViewModel = hiltViewModel<BreedImageViewModel>()
-                    BreedImageScreen(
-                        viewModel = breedImageViewModel,
-                        name = backStackEntry.arguments?.getString("name")
-                    )
-                }
+            composable(
+                route = Screen.BreedImageScreen.route,
+                arguments = listOf(navArgument("name") { type = NavType.StringType })
+            ) { backStackEntry ->
+                val breedImageViewModel = hiltViewModel<BreedImageViewModel>()
+                BreedImageScreen(
+                    viewModel = breedImageViewModel,
+                    name = backStackEntry.arguments?.getString("name")
+                )
             }
         }
     }

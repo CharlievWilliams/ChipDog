@@ -6,10 +6,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,12 +21,11 @@ import com.google.accompanist.placeholder.material.shimmer
 @ExperimentalMaterial3Api
 @Composable
 fun InitialCard(initial: String, isRefreshing: Boolean) {
-    Card(
+    OutlinedCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = dimensionResource(id = R.dimen.grid_spacing)),
-        shape = RoundedCornerShape(dimensionResource(id = R.dimen.small_rounded_corner_size)),
-        colors = CardDefaults.elevatedCardColors(containerColor = MaterialTheme.colors.secondary)
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.small_rounded_corner_size))
     ) {
         Row(
             modifier = Modifier
@@ -44,8 +40,7 @@ fun InitialCard(initial: String, isRefreshing: Boolean) {
                 modifier = Modifier.placeholder(
                     visible = isRefreshing,
                     highlight = PlaceholderHighlight.shimmer()
-                ),
-                color = MaterialTheme.colors.onSecondary
+                )
             )
         }
     }

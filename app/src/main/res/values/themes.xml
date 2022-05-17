@@ -4,4 +4,8 @@
         <item name="android:colorPrimary">@color/dark</item>
         <item name="android:statusBarColor">@color/dark</item>
     </style>
+    
+
+    <style name="Theme.AppWidget.AppWidgetContainer"
+        parent="Theme.Material3.DynamicColors.DayNight" />
 </resources>

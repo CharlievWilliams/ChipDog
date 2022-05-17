@@ -1,9 +1,9 @@
 package com.cwilliams.chipdog.ui.theme
 
+import android.content.Context
+import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 
 private val LightThemeColors = lightColorScheme(
@@ -65,12 +65,24 @@ private val DarkThemeColors = darkColorScheme(
 )
 
 @Composable
-fun ChipDogTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+fun ChipDogTheme(
+    context: Context,
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
 
     val colors = if (darkTheme) {
-        DarkThemeColors
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            dynamicDarkColorScheme(context)
+        } else {
+            DarkThemeColors
+        }
     } else {
-        LightThemeColors
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            dynamicLightColorScheme(context)
+        } else {
+            LightThemeColors
+        }
     }
 
     MaterialTheme(

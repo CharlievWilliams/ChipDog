@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -19,7 +21,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.cwilliams.chipdog.view.component.NavigationBar
+import com.cwilliams.chipdog.view.component.ChipTopAppBar
 import com.cwilliams.chipdog.view.screen.BreedImageScreen
 import com.cwilliams.chipdog.view.screen.BreedListScreen
 import com.cwilliams.chipdog.viewModel.BreedImageViewModel
@@ -29,7 +31,7 @@ import com.cwilliams.chipdog.viewModel.BreedListViewModel
 @ExperimentalAnimationApi
 @ExperimentalMaterial3Api
 @Composable
-fun ChipDogApp() {
+fun ChipDogApp(windowSizeClass: WindowSizeClass) {
 
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -38,13 +40,18 @@ fun ChipDogApp() {
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(decayAnimationSpec)
     }
 
+    // Responsive Booleans
+    val showTopAppBar = windowSizeClass.heightSizeClass != WindowHeightSizeClass.Compact
+
     Scaffold(
         topBar = {
-            NavigationBar(
-                screen = toScreen(navBackStackEntry),
-                popBackStack = { navController.popBackStack() },
-                scrollBehavior = largeTopAppBarScrollBehavior
-            )
+            if (showTopAppBar) {
+                ChipTopAppBar(
+                    screen = toScreen(navBackStackEntry),
+                    popBackStack = { navController.popBackStack() },
+                    scrollBehavior = largeTopAppBarScrollBehavior
+                )
+            }
         },
         modifier = if (toScreen(navBackStackEntry).screenState?.showLargeAppBar == true) {
             Modifier.nestedScroll(largeTopAppBarScrollBehavior.nestedScrollConnection)

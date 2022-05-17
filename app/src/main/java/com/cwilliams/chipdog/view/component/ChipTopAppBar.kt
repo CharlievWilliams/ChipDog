@@ -11,7 +11,7 @@ import com.cwilliams.chipdog.Screen
 import com.cwilliams.chipdog.ui.theme.typography
 
 @Composable
-fun NavigationBar(
+fun ChipTopAppBar(
     screen: Screen?,
     popBackStack: () -> Unit,
     scrollBehavior: TopAppBarScrollBehavior
